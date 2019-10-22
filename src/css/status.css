@@ -1,0 +1,45 @@
+.kb-service-status {
+    max-width: 50%;
+    width: 50%;
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 3px;
+}
+
+.kb-service-status.starting,
+.kb-service-status.updating {
+    border-color: gray;
+}
+
+.kb-service-status.ok {
+    border-color: green;
+}
+
+.kb-service-status.error {
+    border-color: red;
+}
+
+.status-button {
+    margin-left: auto;
+    cursor: pointer;
+}
+
+.status-button:hover {
+    filter: brightness(85%);
+}
+
+.icon-ok {
+    color: green;
+}
+
+.icon-error {
+    color: red;
+}
+
+.icon-loading {
+    color: white;
+}
+
+.status-flex {
+    display: flex;
+}

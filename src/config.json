@@ -1,0 +1,92 @@
+{
+    "env": {
+        "name": "CI",
+        "prefix": "ci"
+    },
+    "services": {
+        "ujs": {
+            "name": "User and Job State",
+            "path": "userandjobstate",
+            "type": "jsonrpc",
+            "module": "UserAndJobState",
+            "method": "ver"
+        },
+        "service_wizard": {
+            "name": "Service Wizard",
+            "path": "service_wizard",
+            "type": "jsonrpc",
+            "module": "ServiceWizard",
+            "method": "version"
+        },
+        "narrative_service": {
+            "name": "Narrative Service",
+            "module": "NarrativeService",
+            "path": "service_wizard",
+            "type": "dynamic",
+            "method": "status"
+        },
+        "feeds": {
+            "name": "Feeds",
+            "module": "Feeds",
+            "path": "feeds",
+            "type": "rest",
+            "method": "/"
+        },
+        "ee2": {
+            "name": "Execution Engine 2",
+            "path": "ee2",
+            "type": "jsonrpc",
+            "method": "status",
+            "module": "execution_engine2"
+        },
+        "relation_engine_api": {
+            "name": "Relation Engine API",
+            "path": "relation_engine_api",
+            "type": "rest",
+            "method": "/",
+            "module": "RelationEngineAPI"
+        },
+        "auth": {
+            "name": "Authentication",
+            "path": "auth",
+            "type": "rest",
+            "module": "Auth",
+            "method": "/"
+        },
+        "workspace": {
+            "name": "Workspace",
+            "path": "ws",
+            "type": "jsonrpc",
+            "module": "Workspace",
+            "method": "ver"
+        },
+        "njs_wrapper": {
+            "name": "NJS Wrapper",
+            "path": "njs_wrapper",
+            "type": "jsonrpc",
+            "module": "NarrativeJobService",
+            "method": "ver"
+        },
+        "handle_service2": {
+            "name": "Handle Service",
+            "path": "handle_service",
+            "type": "jsonrpc",
+            "module": "AbstractHandle",
+            "method": "status"
+        },
+        "catalog": {
+            "name": "Catalog",
+            "path": "catalog",
+            "type": "jsonrpc",
+            "module": "Catalog",
+            "method": "version"
+        },
+        "fake": {
+            "name": "Fake Service",
+            "path": "fake_service",
+            "type": "jsonrpc",
+            "module": "Fake",
+            "method": "status"
+        }
+    }
+}
