@@ -1,11 +1,11 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import StatusClient from '../api/statusClient';
-import StatusIcon from './icon';
+import StatusIcon from './Icon';
 import '../css/status.css';
-import ServiceResponse from './response';
+import ServiceResponse from './Response';
 
-export default class Status extends React.Component {
+export default function Status(props) {
     /**
      * Makes a new Status component, sets the initial status as 'starting'
      * @param {object} props
@@ -18,48 +18,62 @@ export default class Status extends React.Component {
      * module - the registered module name (for making calls with)
      * method - the unauthenticated method to invoke to see if the service is up.
      */
-    constructor(props) {
-        super(props);
-        this.statusClient = new StatusClient(this.props);
-        this.state = {
-            status: 'starting',
-            responseView: false
+    const [status, setStatus] = useState('updating');
+    const [response, setResponse] = useState(null);
+    const [responseView, setResponseView] = useState(false);
+    const statusClient = new StatusClient(props);
+
+    function handleStatusChange(result, newStatus) {
+        setResponse(result);
+        setStatus(newStatus);
+    }
+
+    useEffect(() => {
+        let ignore = false;
+
+        async function lookupStatus () {
+            handleStatusChange('', 'updating');
+            try {
+                const result = await statusClient.getStatus(props.method);
+                // console.log("Got good response for " + props.name, result);
+                if (!ignore) {
+                    handleStatusChange(result, 'ok');
+                }
+            }
+            catch(error) {
+                let result = {
+                    attemptedCall: props.method,
+                    url: props.url
+                };
+                if (error.message) {
+                    result.message = error.message;
+                }
+                if (error.stack) {
+                    result.stack = error.stack;
+                }
+                if (!ignore) {
+                    handleStatusChange(result, 'error');
+                }
+                console.error(error);
+            }
         };
-        this.response = 'Loading. Please wait...';
-        this.toggleResponseView = this.toggleResponseView.bind(this);
+        lookupStatus();
+        return () => { ignore = true; }
+    }, [props.url]);
+
+    function toggleResponseView() {
+        setResponseView(!responseView);
     }
 
-    async componentDidMount() {
-        this.setState(() => { return {status: 'updating'} });
-        try {
-            const response = await this.statusClient.getStatus(this.props.method);
-            console.log("Got good response for " + this.props.name, response);
-            this.setState(() => { return {status: 'ok'} });
-            this.response = response;
-        }
-        catch(error) {
-            this.setState(() => { return {status: 'error'} });
-            console.log(error);
-            this.response = error;
-        }
-    }
-
-    toggleResponseView() {
-        let responseView = !this.state.responseView;
-        this.setState(() => { return {responseView: responseView} });
-    }
-
-    render() {
-        return (
-            <div className={`kb-service-status ${this.state.status}`}>
-                <div className="status-flex">
-                    <div>{this.props.name}</div>
-                    <a onClick={this.toggleResponseView} className="status-button">
-                        <StatusIcon status={this.state.status}/>
-                    </a>
-                </div>
-                <ServiceResponse view={this.state.responseView} response={this.response} />
+    return (
+        <div className={`kb-service-status ${status}`}>
+            <div className="status-flex">
+                <div>{props.name}</div>
+                <a onClick={toggleResponseView} className="status-button">
+                    <StatusIcon status={status}/>
+                </a>
             </div>
-        );
-    }
+            <ServiceResponse view={responseView} response={response} />
+        </div>
+    );
 }
