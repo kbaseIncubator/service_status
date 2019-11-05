@@ -1,8 +1,23 @@
 {
-    "env": {
-        "name": "CI",
-        "prefix": "ci"
+    "environments": {
+        "ci": {
+            "name": "CI",
+            "prefix": "ci"
+        },
+        "next": {
+            "name": "Next",
+            "prefix": "next"
+        },
+        "prod": {
+            "name": "Production",
+            "prefix": ""
+        },
+        "appdev": {
+            "name": "AppDev",
+            "prefix": "appdev"
+        }
     },
+    "env_order": ["prod", "appdev", "next", "ci"],
     "services": {
         "ujs": {
             "name": "User and Job State",

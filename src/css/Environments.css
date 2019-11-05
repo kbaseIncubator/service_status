@@ -1,0 +1,12 @@
+span.selected {
+    background-color: #FFF;
+    color: #000;
+    cursor: default !important;
+}
+
+.env-list span {
+    padding: 1em;
+    margin: 1em;
+    cursor: pointer;
+    font-weight: bold;
+}

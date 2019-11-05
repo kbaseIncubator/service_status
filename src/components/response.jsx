@@ -1,4 +1,5 @@
 import React from 'react';
+import '../css/response.css';
 
 export default class ServiceResponse extends React.Component {
     constructor(props) {
@@ -6,13 +7,11 @@ export default class ServiceResponse extends React.Component {
         this.state = {
             view: false
         }
-        console.log(props);
     }
 
     updateResponse(response) {
-        console.log(response);
         try {
-            response = JSON.stringify(response);
+            response = JSON.stringify(response, null, 2);
         }
         catch (error) {
             // pass
@@ -33,6 +32,6 @@ export default class ServiceResponse extends React.Component {
         }
         const response = this.updateResponse(this.props.response);
         console.log(response);
-        return <div style={{overflow: 'none'}}>{response}</div>
+        return <pre className="response-area">{response}</pre>
     }
 }
