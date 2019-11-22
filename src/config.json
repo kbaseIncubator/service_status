@@ -96,6 +96,13 @@
             "module": "Catalog",
             "method": "version"
         },
+        "search": {
+            "name": "Search",
+            "path": "searchapi",
+            "type": "jsonrpc",
+            "module": "searchapi",
+            "method": "status"
+        },
         "fake": {
             "name": "Fake Service",
             "path": "fake_service",
