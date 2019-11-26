@@ -22,11 +22,6 @@
 
 .status-button {
     margin-left: auto;
-    cursor: pointer;
-}
-
-.status-button:hover {
-    filter: brightness(70%);
 }
 
 .icon-ok {
@@ -42,5 +37,11 @@
 }
 
 .status-flex {
+    cursor: pointer;
     display: flex;
+    transition: opacity 0.1s linear;
+}
+
+.status-flex:hover {
+    opacity: 0.65;
 }

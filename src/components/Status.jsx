@@ -67,13 +67,13 @@ export default function Status(props) {
 
     return (
         <div className={`kb-service-status ${status}`}>
-            <div className="status-flex">
+            <div className="status-flex" onClick={toggleResponseView}>
                 <div>{props.name}</div>
-                <a onClick={toggleResponseView} className="status-button">
+                <a className="status-button">
                     <StatusIcon status={status}/>
                 </a>
             </div>
-            <ServiceResponse view={responseView} response={response} />
+            <ServiceResponse view={responseView} response={response} url={props.url} />
         </div>
     );
 }
