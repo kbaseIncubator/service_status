@@ -3,10 +3,10 @@ import '../css/response.css';
 
 export default class ServiceResponse extends React.Component {
     constructor(props) {
-        super(props)
+        super(props);
         this.state = {
             view: false
-        }
+        };
     }
 
     updateResponse(response) {
@@ -31,7 +31,11 @@ export default class ServiceResponse extends React.Component {
             return <div></div>
         }
         const response = this.updateResponse(this.props.response);
-        console.log(response);
-        return <pre className="response-area">{response}</pre>
+        return (
+            <>
+              <p className="response-url"> {this.props.url} </p>
+              <pre className="response-area">{response}</pre>
+            </>
+        );
     }
 }

@@ -3,3 +3,8 @@
     font-size: smaller;
     overflow: auto;
 }
+
+.response-url {
+    font-size: 1.15rem;
+    font-family: monospace;
+}
